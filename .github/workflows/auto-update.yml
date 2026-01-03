@@ -1,0 +1,45 @@
+name: Auto Update
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js (if needed)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+      if: ${{ hashFiles('package.json') != '' }}
+    
+    - name: Install dependencies
+      run: |
+        if [ -f package.json ]; then
+          npm ci
+        fi
+      continue-on-error: true
+    
+    - name: Run tests (if available)
+      run: |
+        if [ -f package.json ] && grep -q '"test"' package.json; then
+          npm test
+        fi
+      continue-on-error: true
+    
+    - name: Build (if available)
+      run: |
+        if [ -f package.json ] && grep -q '"build"' package.json; then
+          npm run build
+        fi
+      continue-on-error: true
+
