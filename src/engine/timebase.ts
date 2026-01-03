@@ -20,4 +20,3 @@ export const formatSecLabel = (sec: number, view: TimebaseView, tempo: TempoMode
     .padStart(2, "0");
   return `${minutes}:${seconds}`;
 };
-

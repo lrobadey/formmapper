@@ -6,14 +6,17 @@ import type { Selection, DrawerTabKey } from "../state/selection";
 import { ProjectTab } from "./tabs/ProjectTab";
 import { SectionTab } from "./tabs/SectionTab";
 import { CurveTab } from "./tabs/CurveTab";
+import type { Dispatch, SetStateAction } from "react";
 
 interface Props {
   project: Project;
+  onProjectChange: Dispatch<SetStateAction<Project>>;
   selection: Selection;
   onSelectionChange: (next: Selection) => void;
+  warnings: string[];
 }
 
-export function BottomDrawer({ project, selection, onSelectionChange }: Props) {
+export function BottomDrawer({ project, onProjectChange, selection, onSelectionChange, warnings }: Props) {
   const [activeTab, setActiveTab] = useState<DrawerTabKey>("project");
 
   useEffect(() => {
@@ -30,9 +33,18 @@ export function BottomDrawer({ project, selection, onSelectionChange }: Props) {
         <TabButton label="Curve" tab="curve" active={activeTab === "curve"} onClick={() => setActiveTab("curve")} />
       </div>
       <div className="drawer-body">
-        {activeTab === "project" && <ProjectTab project={project} />}
-        {activeTab === "section" && <SectionTab project={project} selection={selection} onSelectSection={setSectionSelection} />}
-        {activeTab === "curve" && <CurveTab project={project} selection={selection} onSelectionChange={onSelectionChange} />}
+        {activeTab === "project" && <ProjectTab project={project} onProjectChange={onProjectChange} warnings={warnings} />}
+        {activeTab === "section" && (
+          <SectionTab
+            project={project}
+            selection={selection}
+            onSelectSection={setSectionSelection}
+            onProjectChange={onProjectChange}
+          />
+        )}
+        {activeTab === "curve" && (
+          <CurveTab project={project} selection={selection} onSelectionChange={onSelectionChange} onProjectChange={onProjectChange} />
+        )}
       </div>
     </div>
   );
@@ -52,4 +64,3 @@ function TabButton({ label, active, onClick }: TabButtonProps) {
     </button>
   );
 }
-

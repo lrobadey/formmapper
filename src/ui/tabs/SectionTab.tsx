@@ -1,13 +1,17 @@
 import type { Project, Section } from "../../state/types";
 import type { Selection } from "../../state/selection";
+import type { Dispatch, SetStateAction } from "react";
+import { insertSectionAtBoundary } from "../../state/sections";
+import { getPalette } from "../../state/appState";
 
 interface Props {
   project: Project;
   selection: Selection;
   onSelectSection: (id: Section["id"]) => void;
+  onProjectChange: Dispatch<SetStateAction<Project>>;
 }
 
-export function SectionTab({ project, selection, onSelectSection }: Props) {
+export function SectionTab({ project, selection, onSelectSection, onProjectChange }: Props) {
   const currentSection = selection.type === "section"
     ? project.sections.find((s) => s.id === selection.id)
     : project.sections[0];
@@ -51,7 +55,30 @@ export function SectionTab({ project, selection, onSelectSection }: Props) {
           ))}
         </div>
       </div>
+      <div className="field">
+        <label>Insert new section after current</label>
+        <button
+          className="pill"
+          onClick={() => {
+            const idx = project.sections.findIndex((s) => s.id === currentSection.id);
+            const palette = getPalette();
+            const colorId = palette[(idx + 1) % palette.length].id;
+            onProjectChange((prev) => {
+              const nextSections = insertSectionAtBoundary(
+                prev.sections,
+                idx,
+                4,
+                `sec-${crypto.randomUUID()}`,
+                `Section ${prev.sections.length + 1}`,
+                colorId
+              );
+              return { ...prev, sections: nextSections };
+            });
+          }}
+        >
+          Insert + ripple
+        </button>
+      </div>
     </div>
   );
 }
-

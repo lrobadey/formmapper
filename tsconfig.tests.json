@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "dist-tests",
+    "rootDir": ".",
+    "strict": true,
+    "esModuleInterop": true,
+    "types": ["node"],
+    "noEmitOnError": true,
+    "skipLibCheck": true
+  },
+  "include": ["tests/**/*.ts", "src/state/**/*.ts", "src/model/**/*.ts", "src/engine/**/*.ts"],
+  "exclude": ["dist", "node_modules"]
+}

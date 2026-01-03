@@ -28,6 +28,25 @@
   color: var(--text-muted);
 }
 
+.field input,
+.field select,
+.field textarea {
+  background: var(--surface-3);
+  border: 1px solid var(--border-1);
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: var(--text-strong);
+}
+
+.field input[type="number"] {
+  max-width: 90px;
+}
+
+.field textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
 .readonly {
   background: var(--surface-3);
   border: 1px solid var(--border-1);

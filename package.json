@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "debug:build": "node scripts/debug-build.cjs",
+    "test": "npm run test:unit",
+    "test:unit": "tsc -p tsconfig.tests.json && node dist-tests/tests/run-tests.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
