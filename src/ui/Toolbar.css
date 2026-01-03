@@ -1,0 +1,40 @@
+.toolbar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border-1);
+  flex-shrink: 0;
+}
+
+.toolbar__title {
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.toolbar__actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-1);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--text-strong);
+  border: 1px solid var(--border-1);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.ghost:hover {
+  border-color: var(--text-muted);
+}

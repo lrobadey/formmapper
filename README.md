@@ -1,16 +1,10 @@
-# Form Graph
+### FormMapper (Form Graph)
 
-Project description goes here.
+This repo is building **FormMapper**: a browser-based canvas editor for mapping musical form (gapless sections + absolute-time energy curve), with JSON and PNG export.
 
-## Setup
+Start here:
 
-Instructions for setting up the project.
+- **North star plan/structure**: `FORMMAPPER_NORTH_STAR.md`
+- **Agent rules** (enforces the north star): `AGENTS.md`
 
-## Usage
-
-How to use the project.
-
-## Contributing
-
-Guidelines for contributing.
 

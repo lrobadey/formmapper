@@ -1,0 +1,10 @@
+:root {
+  --surface-1: #0b1410; /* dark green base */
+  --surface-2: #111d17; /* toolbar/drawer */
+  --surface-3: #172720; /* cards/input surfaces */
+  --border-1: #2c3a33; /* muted green outlines */
+  --text-strong: #e5ece7;
+  --text-muted: #a8b3ad;
+  --accent-1: #d3dbd6; /* flat silver */
+  --accent-2: #b7c1bb;
+}

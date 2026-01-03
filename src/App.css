@@ -1,0 +1,62 @@
+.app-shell {
+  min-height: 100vh;
+  background: var(--surface-1);
+  color: var(--text-strong);
+  display: flex;
+  flex-direction: column;
+}
+
+.main-area {
+  flex: 1;
+  display: flex;
+  min-height: 0; /* allow canvas to size within viewport */
+}
+
+.field {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field h4 {
+  margin: 0;
+}
+
+.field label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.readonly {
+  background: var(--surface-3);
+  border: 1px solid var(--border-1);
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: var(--text-strong);
+}
+
+.readonly.multiline {
+  min-height: 60px;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  background: var(--surface-3);
+  border: 1px solid var(--border-1);
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: var(--text-strong);
+  cursor: pointer;
+}
+
+.pill.active {
+  background: var(--accent-1);
+  border-color: var(--accent-2);
+  color: #0c0f11;
+}
