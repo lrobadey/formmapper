@@ -15,8 +15,7 @@ const timebaseLabels: Record<TimebaseView, string> = {
 
 export function ProjectTab({ project, onProjectChange, warnings }: Props) {
   return (
-    <div>
-      <h4>Project</h4>
+    <div className="drawer-section">
       <div className="field">
         <label>Title</label>
         <input
@@ -102,7 +101,7 @@ export function ProjectTab({ project, onProjectChange, warnings }: Props) {
           />
         </div>
       </div>
-      <div className="field">
+      <div className="field drawer-section__full">
         <label>Notes</label>
         <textarea
           className="readonly multiline"
@@ -111,7 +110,7 @@ export function ProjectTab({ project, onProjectChange, warnings }: Props) {
         />
       </div>
       {warnings.length > 0 && (
-        <div className="field">
+        <div className="field drawer-section__full">
           <label>Import warnings</label>
           <div className="readonly multiline">
             <ul style={{ paddingLeft: 16, margin: 0 }}>

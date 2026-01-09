@@ -21,8 +21,7 @@ export function SectionTab({ project, selection, onSelectSection, onProjectChang
   }
 
   return (
-    <div>
-      <h4>Section</h4>
+    <div className="drawer-section">
       <div className="field">
         <label>Selected</label>
         <div className="readonly">{currentSection.name}</div>
@@ -41,7 +40,7 @@ export function SectionTab({ project, selection, onSelectSection, onProjectChang
         <label>Notes</label>
         <div className="readonly multiline">{currentSection.notes || "—"}</div>
       </div>
-      <div className="field">
+      <div className="field drawer-section__full">
         <label>Switch section</label>
         <div className="pill-row">
           {project.sections.map((s) => (
@@ -55,7 +54,7 @@ export function SectionTab({ project, selection, onSelectSection, onProjectChang
           ))}
         </div>
       </div>
-      <div className="field">
+      <div className="field drawer-section__full">
         <label>Insert new section after current</label>
         <button
           className="pill"

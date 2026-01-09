@@ -26,8 +26,7 @@ export function CurveTab({ project, selection, onSelectionChange, onProjectChang
   const segmentEnd = validSegment ? points[segmentIndex + 1] : null;
 
   return (
-    <div>
-      <h4>Curve</h4>
+    <div className="drawer-section">
       {point ? (
         <>
           <div className="field">
@@ -36,7 +35,7 @@ export function CurveTab({ project, selection, onSelectionChange, onProjectChang
               {point.sec.toFixed(1)}s, y={point.y.toFixed(2)} ({point.rightTransition.type})
             </div>
           </div>
-          <div className="field">
+          <div className="field drawer-section__full">
             <label>Switch point</label>
             <div className="pill-row">
               {project.energyCurve.points.map((p) => (
@@ -58,7 +57,7 @@ export function CurveTab({ project, selection, onSelectionChange, onProjectChang
                   {segmentStart.sec.toFixed(1)}s → {segmentEnd.sec.toFixed(1)}s
                 </div>
               </div>
-              <div className="field">
+              <div className="field drawer-section__full">
                 <label>Transition type</label>
                 <div className="pill-row">
                   {["linear", "step", "curve"].map((t) => (
@@ -78,7 +77,7 @@ export function CurveTab({ project, selection, onSelectionChange, onProjectChang
                   ))}
                 </div>
               </div>
-              <div className="field">
+              <div className="field drawer-section__full">
                 <label>Curve param ({segmentStart.rightTransition.param.toFixed(2)})</label>
                 <input
                   type="range"
