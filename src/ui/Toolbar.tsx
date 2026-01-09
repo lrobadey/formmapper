@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { Upload, Download, Image, RotateCcw } from "lucide-react";
 import "./Toolbar.css";
 import type { Project, TimebaseView } from "../state/types";
 
@@ -31,6 +30,45 @@ const labelForTimebase = (view: TimebaseView) => {
       return "Time";
   }
 };
+
+function IconUpload() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3v12" />
+      <path d="M7 8l5-5 5 5" />
+      <path d="M5 21h14" />
+    </svg>
+  );
+}
+
+function IconDownload() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 21V9" />
+      <path d="M7 16l5 5 5-5" />
+      <path d="M5 3h14" />
+    </svg>
+  );
+}
+
+function IconImage() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M8 11a2 2 0 1 0 0-0.01" />
+      <path d="M21 16l-5-5-5 5-3-3-5 5" />
+    </svg>
+  );
+}
+
+function IconRotateCcw() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 12a9 9 0 1 0 3-6.7" />
+      <path d="M3 4v4h4" />
+    </svg>
+  );
+}
 
 export function Toolbar({
   project,
@@ -74,21 +112,21 @@ export function Toolbar({
           data-tooltip="Import"
           onClick={() => fileInputRef.current?.click()}
         >
-          <Upload />
+          <IconUpload />
         </button>
         <button
           className="toolbar__btn toolbar__btn--icon"
           data-tooltip="Export JSON"
           onClick={onExport}
         >
-          <Download />
+          <IconDownload />
         </button>
         <button
           className="toolbar__btn toolbar__btn--icon"
           data-tooltip="Export PNG"
           onClick={onExportPng}
         >
-          <Image />
+          <IconImage />
         </button>
 
         <div className="toolbar__divider" />
@@ -112,7 +150,7 @@ export function Toolbar({
           data-tooltip="Reset zoom"
           onClick={onZoomReset}
         >
-          <RotateCcw />
+          <IconRotateCcw />
         </button>
       </div>
     </header>
