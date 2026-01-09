@@ -1,0 +1,67 @@
+/*
+  FormMapper — CurveTab
+  Nordic Ice Design System
+*/
+
+.curve-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.curve-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.curve-grid .field {
+  margin-bottom: 4px;
+}
+
+.curve-inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.curve-inline label {
+  min-width: 110px;
+  margin: 0;
+}
+
+.curve-inline .readonly,
+.curve-inline .pill-row,
+.curve-inline .curve-range-control {
+  flex: 1;
+}
+
+.curve-pill-row {
+  flex-wrap: nowrap;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.curve-pill-row .pill {
+  white-space: nowrap;
+}
+
+.curve-range-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.curve-range-control input[type="range"] {
+  flex: 1;
+  min-width: 120px;
+}
+
+.curve-range-value {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
