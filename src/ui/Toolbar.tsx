@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Upload, Download, Image, RotateCcw } from "lucide-react";
 import "./Toolbar.css";
 import type { Project, TimebaseView } from "../state/types";
 
@@ -23,9 +24,9 @@ const nextTimebase = (current: TimebaseView): TimebaseView => {
 const labelForTimebase = (view: TimebaseView) => {
   switch (view) {
     case "measuresComputed":
-      return "Measures (BPM)";
+      return "Measures";
     case "measuresAbstract":
-      return "Measures (abstract)";
+      return "Abstract";
     default:
       return "Time";
   }
@@ -45,38 +46,73 @@ export function Toolbar({
   return (
     <header className="toolbar">
       <div className="toolbar__left">
-        <span className="toolbar__title">{project.title || "Untitled"}</span>
+        <div className="toolbar__titleblock">
+          <span className="toolbar__title">{project.title || "Untitled"}</span>
+          {project.composerOrArtist ? (
+            <span className="toolbar__subtitle">{project.composerOrArtist}</span>
+          ) : null}
+        </div>
       </div>
+
       <div className="toolbar__actions">
+        {/* File input (hidden) */}
         <input
           ref={fileInputRef}
           type="file"
           accept=".json,.formmapper.json,application/json"
-          style={{ display: "none" }}
+          className="toolbar__file-input"
           onChange={(e) => {
             const file = e.target.files?.[0];
             if (file) onImport(file);
             e.target.value = "";
           }}
         />
-        <button className="ghost" onClick={() => fileInputRef.current?.click()}>
-          Import
+
+        {/* Icon buttons */}
+        <button
+          className="toolbar__btn toolbar__btn--icon"
+          data-tooltip="Import"
+          onClick={() => fileInputRef.current?.click()}
+        >
+          <Upload />
         </button>
-        <button className="ghost" onClick={onExport}>
-          Export JSON
+        <button
+          className="toolbar__btn toolbar__btn--icon"
+          data-tooltip="Export JSON"
+          onClick={onExport}
+        >
+          <Download />
         </button>
-        <button className="ghost" onClick={onExportPng}>
-          Export PNG
+        <button
+          className="toolbar__btn toolbar__btn--icon"
+          data-tooltip="Export PNG"
+          onClick={onExportPng}
+        >
+          <Image />
         </button>
-        <div className="divider" />
-        <button className="ghost" onClick={() => onTimebaseChange(nextTimebase(timebaseView))}>
-          Timebase: {labelForTimebase(timebaseView)}
+
+        <div className="toolbar__divider" />
+
+        {/* Text buttons for contextual info */}
+        <button
+          className="toolbar__btn toolbar__btn--text"
+          onClick={() => onTimebaseChange(nextTimebase(timebaseView))}
+        >
+          {labelForTimebase(timebaseView)}
         </button>
-        <button className="ghost" disabled title="Snap is always on per north star">
-          Snap: On
+        <button
+          className="toolbar__btn toolbar__btn--text"
+          disabled
+          title="Snap is always on"
+        >
+          Snap
         </button>
-        <button className="ghost" onClick={onZoomReset}>
-          Zoom reset
+        <button
+          className="toolbar__btn toolbar__btn--icon"
+          data-tooltip="Reset zoom"
+          onClick={onZoomReset}
+        >
+          <RotateCcw />
         </button>
       </div>
     </header>

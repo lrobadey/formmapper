@@ -1,0 +1,59 @@
+/*
+  FormMapper — SectionTab
+  Nordic Ice Design System
+*/
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+  transition:
+    transform var(--duration-fast) var(--ease-spring),
+    border-color var(--duration-fast) var(--ease-smooth),
+    box-shadow var(--duration-fast) var(--ease-smooth);
+}
+
+.swatch:hover {
+  transform: scale(1.1);
+  border-color: var(--border-default);
+}
+
+.swatch:active {
+  transform: scale(0.95);
+}
+
+.swatch:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring), inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+}
+
+.swatch.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-muted), inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.two-col .field {
+  margin-bottom: 0;
+}
+
+.compact-readout {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}

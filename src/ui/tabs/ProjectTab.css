@@ -1,0 +1,36 @@
+/*
+  FormMapper — ProjectTab
+  Nordic Ice Design System
+*/
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-grid .field {
+  margin-bottom: 0;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.row .field {
+  margin-bottom: 0;
+}
+
+.row .field input[type="number"] {
+  max-width: 80px;
+}
+
+.muted {
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}

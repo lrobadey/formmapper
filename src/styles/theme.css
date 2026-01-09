@@ -1,10 +1,109 @@
+/*
+  FormMapper — Nordic Ice Design System
+  
+  A Finland-inspired dark theme with icy blue accents,
+  spring-based motion, and reactive UI patterns.
+*/
+
 :root {
-  --surface-1: #0b1410; /* dark green base */
-  --surface-2: #111d17; /* toolbar/drawer */
-  --surface-3: #172720; /* cards/input surfaces */
-  --border-1: #2c3a33; /* muted green outlines */
-  --text-strong: #e5ece7;
-  --text-muted: #a8b3ad;
-  --accent-1: #d3dbd6; /* flat silver */
-  --accent-2: #b7c1bb;
+  /* ═══════════════════════════════════════════════════════════════
+     SURFACES — Deep blacks with subtle green undertone
+     ═══════════════════════════════════════════════════════════════ */
+  --surface-0: #050808;           /* true black base - canvas deep */
+  --surface-1: #0a0f0e;           /* app background */
+  --surface-2: #0f1614;           /* elevated (toolbar, drawer) */
+  --surface-3: #151e1b;           /* cards, inputs */
+  --surface-4: #1c2724;           /* hover states */
+
+  /* Legacy aliases for compatibility */
+  --border-1: var(--border-subtle);
+  --text-strong: var(--text-primary);
+  --text-muted: var(--text-secondary);
+  --accent-1: var(--accent);
+  --accent-2: var(--ice-400);
+
+  /* ═══════════════════════════════════════════════════════════════
+     BORDERS
+     ═══════════════════════════════════════════════════════════════ */
+  --border-subtle: rgba(120, 140, 135, 0.12);
+  --border-default: rgba(120, 140, 135, 0.20);
+  --border-strong: rgba(120, 140, 135, 0.35);
+
+  /* ═══════════════════════════════════════════════════════════════
+     TEXT
+     ═══════════════════════════════════════════════════════════════ */
+  --text-primary: #e8edeb;
+  --text-secondary: #8a9692;
+  --text-tertiary: #5a6662;
+
+  /* ═══════════════════════════════════════════════════════════════
+     FINLAND ICE — The Hero Accent
+     ═══════════════════════════════════════════════════════════════ */
+  --ice-50: #f0f7fa;
+  --ice-100: #d4e8f0;
+  --ice-200: #a8d0e0;
+  --ice-300: #7ab8ce;             /* primary accent */
+  --ice-400: #5a9db8;
+  --ice-500: #3d8099;
+
+  --accent: var(--ice-300);
+  --accent-hover: var(--ice-200);
+  --accent-muted: rgba(122, 184, 206, 0.15);
+  --accent-glow: rgba(122, 184, 206, 0.4);
+
+  /* ═══════════════════════════════════════════════════════════════
+     GLASS EFFECTS
+     ═══════════════════════════════════════════════════════════════ */
+  --glass-bg: rgba(15, 22, 20, 0.72);
+  --glass-bg-elevated: rgba(21, 30, 27, 0.85);
+  --glass-blur: 28px;
+  --glass-saturate: 1.4;
+  --glass-border: rgba(122, 184, 206, 0.08);
+  --glass-border-hover: rgba(122, 184, 206, 0.18);
+
+  /* ═══════════════════════════════════════════════════════════════
+     SHADOWS
+     ═══════════════════════════════════════════════════════════════ */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px var(--accent-glow);
+  --shadow-glow-sm: 0 0 12px rgba(122, 184, 206, 0.25);
+
+  /* ═══════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════ */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-ui: "JetBrains Mono", "SF Mono", monospace;
+  --font-data: "JetBrains Mono", monospace;
+
+  --text-xs: 10px;
+  --text-sm: 12px;
+  --text-base: 14px;
+  --text-lg: 16px;
+
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
+
+  /* ═══════════════════════════════════════════════════════════════
+     MOTION
+     ═══════════════════════════════════════════════════════════════ */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --duration-instant: 100ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+
+  /* ═══════════════════════════════════════════════════════════════
+     RADII
+     ═══════════════════════════════════════════════════════════════ */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-full: 999px;
+
+  --focus-ring: 0 0 0 2px var(--surface-1), 0 0 0 4px var(--accent);
 }

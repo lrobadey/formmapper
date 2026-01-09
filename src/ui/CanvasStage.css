@@ -1,8 +1,22 @@
+/*
+  FormMapper — Canvas Stage
+  Nordic Ice Design System
+*/
+
 .canvas-stage {
   position: relative;
   flex: 1;
-  background: var(--surface-1);
   overflow: hidden;
+  background: var(--surface-0);
+
+  /* Entrance animation */
+  animation: canvasFadeIn var(--duration-slow) var(--ease-out-expo) both;
+  animation-delay: 50ms;
+}
+
+@keyframes canvasFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .canvas-stage canvas {
@@ -11,15 +25,16 @@
   display: block;
 }
 
-.selection-readout {
+/* Reorder marker for drag operations */
+.section-reorder-marker {
   position: absolute;
-  bottom: 8px;
-  right: 12px;
-  font-size: 12px;
-  color: var(--text-muted);
-  background: rgba(0, 0, 0, 0.35);
-  padding: 4px 8px;
-  border-radius: 6px;
-  border: 1px solid var(--border-1);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-1px);
+  background: var(--accent);
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 0 16px var(--accent-glow);
+  pointer-events: none;
 }
-

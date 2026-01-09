@@ -1,8 +1,17 @@
+/*
+  FormMapper — App Styles
+  Nordic Ice Design System + Codex Layout Fixes
+*/
+
+/* ═══════════════════════════════════════════════════════════════
+   APP SHELL — Codex viewport constraints preserved
+   ═══════════════════════════════════════════════════════════════ */
+
 .app-shell {
   min-height: 100vh;
   height: 100vh;
   background: var(--surface-1);
-  color: var(--text-strong);
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -14,11 +23,29 @@
   min-height: 0; /* allow canvas to size within viewport */
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════════ */
+
+h4 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FORM FIELDS
+   ═══════════════════════════════════════════════════════════════ */
+
 .field {
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .field h4 {
@@ -26,58 +53,251 @@
 }
 
 .field label {
-  font-size: 11px;
-  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-secondary);
+  text-transform: uppercase;
 }
 
 .field input,
 .field select,
 .field textarea {
+  width: 100%;
+  padding: 8px 10px;
   background: var(--surface-3);
-  border: 1px solid var(--border-1);
-  border-radius: 6px;
-  padding: 6px 8px;
-  color: var(--text-strong);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  outline: none;
+  transition: 
+    border-color var(--duration-fast) var(--ease-smooth),
+    box-shadow var(--duration-fast) var(--ease-smooth),
+    background var(--duration-fast) var(--ease-smooth);
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+  border-color: var(--border-default);
+  background: var(--surface-4);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-muted);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--text-tertiary);
 }
 
 .field input[type="number"] {
   max-width: 90px;
+  font-variant-numeric: tabular-nums;
 }
 
 .field textarea {
   min-height: 52px;
   resize: vertical;
+  line-height: 1.5;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--accent);
+}
+
+input[type="range"] {
+  accent-color: var(--accent);
 }
 
 .readonly {
-  background: var(--surface-3);
-  border: 1px solid var(--border-1);
-  border-radius: 6px;
-  padding: 6px 8px;
-  color: var(--text-strong);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
 }
 
 .readonly.multiline {
   min-height: 52px;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   PILLS & CHIPS
+   ═══════════════════════════════════════════════════════════════ */
+
 .pill-row {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  align-items: center;
 }
 
 .pill {
   background: var(--surface-3);
-  border: 1px solid var(--border-1);
-  border-radius: 999px;
-  padding: 6px 10px;
-  color: var(--text-strong);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 6px 12px;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
   cursor: pointer;
+  transition: 
+    background var(--duration-fast) var(--ease-smooth),
+    border-color var(--duration-fast) var(--ease-smooth),
+    transform var(--duration-fast) var(--ease-spring),
+    box-shadow var(--duration-normal) var(--ease-smooth);
+}
+
+.pill:hover {
+  background: var(--surface-4);
+  border-color: var(--border-default);
+  transform: translateY(-1px);
+}
+
+.pill:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.pill:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 .pill.active {
-  background: var(--accent-1);
-  border-color: var(--accent-2);
-  color: #0c0f11;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--surface-0);
+}
+
+.pill.active:hover {
+  background: var(--accent-hover);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CHIP INPUT (Tags)
+   ═══════════════════════════════════════════════════════════════ */
+
+.chip-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 6px;
+  background: var(--surface-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: 
+    border-color var(--duration-fast) var(--ease-smooth),
+    box-shadow var(--duration-fast) var(--ease-smooth);
+}
+
+.chip-input:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-muted);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  background: var(--surface-4);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+}
+
+.chip__x {
+  background: transparent;
+  border: 0;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  font-size: 12px;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+.chip__x:hover {
+  color: var(--text-primary);
+}
+
+.chip-input__field {
+  flex: 1;
+  min-width: 80px;
+  background: transparent;
+  border: 0;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  outline: none;
+  padding: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SEGMENTED CONTROL
+   ═══════════════════════════════════════════════════════════════ */
+
+.segmented {
+  display: inline-flex;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 2px;
+  gap: 2px;
+}
+
+.segmented__item {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 0;
+  border-radius: var(--radius-full);
+  padding: 5px 10px;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: 
+    background var(--duration-fast) var(--ease-smooth),
+    color var(--duration-fast) var(--ease-smooth);
+}
+
+.segmented__item:hover {
+  background: var(--surface-3);
+  color: var(--text-primary);
+}
+
+.segmented__item.active {
+  background: var(--accent);
+  color: var(--surface-0);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeSlideUp var(--duration-normal) var(--ease-out-expo) both;
 }

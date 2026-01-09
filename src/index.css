@@ -1,20 +1,27 @@
+/*
+  FormMapper — Base Styles
+*/
+
 :root {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-ui);
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
 }
 
 * {
   box-sizing: border-box;
+  transition-timing-function: var(--ease-out-expo);
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  /* Codex: Ensure body fills viewport */
   min-height: 100vh;
   height: 100vh;
   background: var(--surface-1);
@@ -26,6 +33,36 @@ button {
 }
 
 #root {
+  /* Codex: Ensure root fills viewport */
   min-height: 100vh;
   height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-default) transparent;
+}
+
+::selection {
+  background: var(--accent-muted);
+  color: var(--text-primary);
 }
