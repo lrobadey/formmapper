@@ -13,10 +13,10 @@
 }
 
 .field {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .field h4 {
@@ -24,7 +24,7 @@
 }
 
 .field label {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
 }
 
@@ -34,7 +34,7 @@
   background: var(--surface-3);
   border: 1px solid var(--border-1);
   border-radius: 6px;
-  padding: 8px 10px;
+  padding: 6px 8px;
   color: var(--text-strong);
 }
 
@@ -43,7 +43,7 @@
 }
 
 .field textarea {
-  min-height: 60px;
+  min-height: 52px;
   resize: vertical;
 }
 
@@ -51,12 +51,12 @@
   background: var(--surface-3);
   border: 1px solid var(--border-1);
   border-radius: 6px;
-  padding: 8px 10px;
+  padding: 6px 8px;
   color: var(--text-strong);
 }
 
 .readonly.multiline {
-  min-height: 60px;
+  min-height: 52px;
 }
 
 .pill-row {

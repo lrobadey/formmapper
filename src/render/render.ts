@@ -11,7 +11,7 @@ const axisColor = "#cdd5df";
 const curveColor = "#f0f4ff";
 const textColor = "#e3e7ec";
 
-export const SECTION_BAR_HEIGHT = 28;
+export const SECTION_BAR_HEIGHT = 24;
 
 const paletteMap = new Map(getPalette().map((p) => [p.id, p.hex]));
 
@@ -29,10 +29,10 @@ export interface Layout {
 }
 
 export const computeLayout = (width: number, height: number): Layout => {
-  const bottomPadding = 40;
-  const curveTop = 12;
+  const bottomPadding = Math.max(32, Math.min(40, height * 0.08));
+  const curveTop = Math.max(8, Math.min(12, height * 0.03));
   const axisY = height - bottomPadding;
-  const curveBottom = axisY - 12;
+  const curveBottom = axisY - Math.max(8, Math.min(12, height * 0.03));
   const curveHeight = curveBottom - curveTop;
   const sectionY = axisY - SECTION_BAR_HEIGHT;
   return { width, height, bottomPadding, axisY, curveTop, curveBottom, curveHeight, sectionY };
