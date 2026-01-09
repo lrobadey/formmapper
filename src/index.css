@@ -16,7 +16,9 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  height: 100vh;
   background: var(--surface-1);
+  overflow: hidden;
 }
 
 button {
@@ -25,4 +27,5 @@ button {
 
 #root {
   min-height: 100vh;
+  height: 100vh;
 }
