@@ -3,34 +3,86 @@
   Nordic Ice Design System
 */
 
-.form-grid {
+.project-tab__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  align-items: start;
 }
 
-.form-grid .field {
-  margin-bottom: 0;
-}
-
-.row {
+.project-tab__panel {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
-.row .field {
-  margin-bottom: 0;
-}
-
-.row .field input[type="number"] {
-  max-width: 80px;
-}
-
-.muted {
+.project-tab__panel-title {
   color: var(--text-tertiary);
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
+}
+
+.project-tab__field {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.project-tab__label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.project-tab__tempo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.project-tab__tempo-pill {
+  cursor: default;
+  white-space: nowrap;
+}
+
+.project-tab__tempo-input {
+  max-width: 84px;
+}
+
+.project-tab__tempo-divider {
+  color: var(--text-tertiary);
+}
+
+.project-tab__notes-panel {
+  gap: 12px;
+}
+
+.project-tab__notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.project-tab__notes-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.project-tab__textarea {
+  min-height: 120px;
+  height: 120px;
+  resize: vertical;
+}
+
+.project-tab__warnings {
+  height: 120px;
+  overflow: auto;
+}
+
+.project-tab__warnings-list {
+  padding-left: 16px;
+  margin: 0;
 }
