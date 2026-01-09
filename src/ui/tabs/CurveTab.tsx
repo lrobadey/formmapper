@@ -27,8 +27,7 @@ export function CurveTab({ project, selection, onSelectionChange, onProjectChang
   const segmentEnd = validSegment ? points[segmentIndex + 1] : null;
 
   return (
-    <div>
-      <h4>Curve</h4>
+    <div className="drawer-section">
       {point ? (
         <>
           <div className="curve-grid">
