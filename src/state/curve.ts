@@ -28,7 +28,8 @@ export const addCurvePoint = (
 ): { points: CurvePoint[]; id: string } => {
   const clampedY = clamp(y, yMin, yMax);
   const id = makeId();
-  const next = [...points, { id, sec, y: clampedY, rightTransition: { type: "linear", param: 0 } }];
+  const rightTransition: CurvePoint["rightTransition"] = { type: "linear", param: 0 };
+  const next = [...points, { id, sec, y: clampedY, rightTransition }];
   return { points: sortAndResolve(next), id };
 };
 
