@@ -135,6 +135,35 @@
   font-size: var(--text-base);
 }
 
+.drawer-project-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.drawer-project-meta__field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1 1 180px;
+  min-width: 160px;
+}
+
+.drawer-project-meta__field span {
+  color: var(--text-tertiary, var(--text-secondary));
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.drawer-project-meta__field input,
+.drawer-project-meta__field select {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 /* Animation for tab content */
 .drawer__content {
   animation: fadeSlideUp var(--duration-normal) var(--ease-out-expo) both;
