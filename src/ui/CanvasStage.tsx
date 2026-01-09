@@ -20,7 +20,7 @@ interface Props {
   onViewportChange: (next: ViewportState) => void;
   selection: Selection;
   onSelectionChange: (next: Selection) => void;
-  canvasRef?: React.RefObject<HTMLCanvasElement>;
+  canvasRef?: React.RefObject<HTMLCanvasElement | null>;
 }
 
 type DragState =

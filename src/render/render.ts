@@ -1,4 +1,4 @@
-import type { Project, Section, CurvePoint } from "../state/types";
+import type { Project, Section } from "../state/types";
 import type { ViewportState } from "../state/viewport";
 import { secToPx } from "../engine/transforms";
 import { formatSecLabel } from "../engine/timebase";
@@ -163,7 +163,7 @@ function drawCurve(
 }
 
 function drawAxis(ctx: CanvasRenderingContext2D, project: Project, viewport: ViewportState, layout: Layout) {
-  const { axisY, width, height } = layout;
+  const { axisY, width } = layout;
   ctx.strokeStyle = axisColor;
   ctx.lineWidth = 1;
   ctx.beginPath();
