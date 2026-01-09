@@ -36,7 +36,7 @@ export function SectionTab({ project, selection, onSelectSection, onProjectChang
         <label>Tags</label>
         <div className="readonly">{(currentSection.tags || []).join(", ") || "—"}</div>
       </div>
-      <div className="field">
+      <div className="field drawer-section__full">
         <label>Notes</label>
         <div className="readonly multiline">{currentSection.notes || "—"}</div>
       </div>
