@@ -92,7 +92,7 @@ export function renderScene(
   drawSections(ctx, project, viewport, layout, selection);
   drawCurve(ctx, project, viewport, layout, selection);
   drawAxis(ctx, project, viewport, layout);
-  drawTitle(ctx, project, layout);
+  drawTitle(ctx, project);
 
   ctx.restore();
 }
@@ -351,7 +351,7 @@ function drawAxis(
    TITLE
    ═══════════════════════════════════════════════════════════════ */
 
-function drawTitle(ctx: CanvasRenderingContext2D, project: Project, layout: Layout) {
+function drawTitle(ctx: CanvasRenderingContext2D, project: Project) {
   ctx.fillStyle = COLORS.textMuted;
   ctx.font = '12px "Space Grotesk", system-ui, sans-serif';
   ctx.fillText(project.title, 12, 18);
