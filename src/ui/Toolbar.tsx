@@ -9,6 +9,7 @@ interface Props {
   onImport: (file: File) => void;
   onExport: () => void;
   onExportPng: () => void;
+  onProjectReset: () => void;
   onTimebaseChange: (view: TimebaseView) => void;
   onZoomReset: () => void;
 }
@@ -38,6 +39,7 @@ export function Toolbar({
   onImport,
   onExport,
   onExportPng,
+  onProjectReset,
   onTimebaseChange,
   onZoomReset,
 }: Props) {
@@ -89,6 +91,12 @@ export function Toolbar({
           onClick={onExportPng}
         >
           <Image />
+        </button>
+        <button
+          className="toolbar__btn toolbar__btn--text"
+          onClick={onProjectReset}
+        >
+          Reset Project
         </button>
 
         <div className="toolbar__divider" />

@@ -19,6 +19,10 @@ Primary use cases:
 - Analyze tracks by segmenting form, tagging sections, writing notes, sketching energy.
 - Compose by roughing out form arcs quickly.
 
+Default startup state:
+- App opens to a **blank project shell**, not seeded demo content.
+- Blank shell defaults: empty title/artist/notes, `timebaseView: "time"`, tempo enabled at `120 bpm` in `4/4`, `sections: []`, `energyCurve.points: []`.
+
 ---
 
 ## 2) Non-negotiable UX decisions (locked)
@@ -40,7 +44,8 @@ Primary use cases:
 
 ### Sections (gapless)
 
-- Sections fully cover `[0, projectEndSec]` with no holes.
+- Blank startup/reset state may contain zero sections.
+- Once sections exist, they fully cover `[0, projectEndSec]` with no holes.
 - No overlaps; **ripple/push editing** is default.
 - Insertion is **boundary-only**: insert only between sections; elsewhere snaps to nearest boundary.
 - Silence gaps are explicit sections.
@@ -52,6 +57,13 @@ Primary use cases:
 - Add point via double-click.
 - Segment transition types: **Linear**, **Step**, **Curve** with one parameter.
 - **Step behavior**: segment-level; instantaneous change at the boundary between points.
+- **Curve behavior**: render each `curve` segment as a quadratic Bezier using a shared helper:
+  - control point = segment midpoint + normalized perpendicular offset
+  - offset magnitude = `segmentLength * 0.25 * param`
+  - `param` is clamped to `[-1, 1]`
+  - `param = 0` is the neutral linear midpoint
+  - positive and negative params bend to opposite sides
+  - rendering and hit-testing must use the same helper so the visible path and interaction region stay aligned
 
 ### Timebase modes
 
@@ -67,6 +79,7 @@ Primary use cases:
 - Import
 - Export JSON
 - Export PNG
+- Reset Project
 - Timebase switch
 - Snap toggle
 - Zoom reset
@@ -125,6 +138,30 @@ Undo/redo: not required in MVP.
 }
 ```
 
+Canonical blank shell is valid with:
+
+```json
+{
+  "schemaVersion": 1,
+  "title": "",
+  "composerOrArtist": "",
+  "projectNotes": "",
+  "timebaseView": "time",
+  "tempoModel": {
+    "enabled": true,
+    "bpm": 120,
+    "timeSig": { "numerator": 4, "denominator": 4 }
+  },
+  "sections": [],
+  "energyCurve": {
+    "yBands": ["Low", "Medium", "High"],
+    "yMin": 0,
+    "yMax": 1,
+    "points": []
+  }
+}
+```
+
 ### 3.2 Curve model semantics (deterministic)
 
 - Store transition on outgoing side: `points[i].rightTransition` defines interpolation from `i` to `i+1`.
@@ -160,6 +197,7 @@ Fixed curated palette:
 ### 4.1 Project length (computed)
 
 - `projectEndSec = max( lastSection.endSec, max(curvePoint.sec) )`
+- If there are no sections and no curve points, `projectEndSec = 0`.
 - In practice sections usually determine length, but curve may extend beyond and must extend length if needed.
 
 ### 4.2 Measures computed mode
@@ -185,7 +223,7 @@ Snap step depends on view:
 Sections:
 
 - Sorted by time
-- `sections[0].startSec === 0`
+- If `sections.length > 0`, then `sections[0].startSec === 0`
 - For all i: `sections[i].endSec > sections[i].startSec`
 - For all i>0: `sections[i].startSec === sections[i-1].endSec`
 - No gaps, no overlaps
@@ -230,6 +268,12 @@ Insertion (MVP decision; boundary-only):
 - Select segment: edit transition type and curve param
 - Step rendering: vertical jump at the right boundary time
 
+### 5.4 Reset behavior
+
+- `Reset Project` prompts for confirmation because MVP has no undo/redo.
+- On confirm, reset to the canonical blank shell.
+- Reset also clears selection, import warnings, and viewport pan/zoom.
+
 ---
 
 ## 6) Import/Export + PNG
@@ -239,11 +283,13 @@ Insertion (MVP decision; boundary-only):
 - Validate `schemaVersion`
 - Validate required fields/types
 - Repair safe issues (sort sections, enforce gapless if possible, sort points)
+- Empty diagrams are valid canonical input; repair must not insert placeholder sections or curve points.
 - Surface warnings in UI (non-blocking list)
 
 ### 6.2 Export `.formmapper.json`
 
 - Serialize exactly to schema
+- Blank projects export as schema-valid empty arrays for `sections` and `energyCurve.points`
 - File name: `${title || "Untitled"}.formmapper.json`
 
 ### 6.3 Export PNG
@@ -284,5 +330,3 @@ Suggested structure (separate responsibilities so timebase, snapping, selection,
 - Multi-track lanes, automation, audio sync, playback
 - Complex tempo maps (variable tempo)
 - Vertical zoom
-
-

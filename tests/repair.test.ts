@@ -32,3 +32,26 @@ test("repairProject enforces gapless sections and clamps curve values with warni
   assertCondition(warnings.length > 0, "Warnings should be emitted for repairs");
   assertEqual(project.title, "Untitled");
 });
+
+test("repairProject preserves an empty diagram without placeholder content", () => {
+  const blankProject: Project = {
+    schemaVersion: 1,
+    title: "",
+    composerOrArtist: "",
+    projectNotes: "",
+    timebaseView: "time",
+    tempoModel: { enabled: true, bpm: 120, timeSig: { numerator: 4, denominator: 4 } },
+    sections: [],
+    energyCurve: {
+      yBands: ["Low", "Medium", "High"],
+      yMin: 0,
+      yMax: 1,
+      points: [],
+    },
+  };
+
+  const { project, warnings } = repairProject(blankProject);
+  assertEqual(project.sections.length, 0, "Blank project should remain sectionless");
+  assertEqual(project.energyCurve.points.length, 0, "Blank project should remain point-free");
+  assertCondition(!warnings.some((warning) => warning.includes("placeholder section")), "Placeholder repair should not run");
+});

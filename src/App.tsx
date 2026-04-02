@@ -3,7 +3,6 @@ import "./App.css";
 import { Toolbar } from "./ui/Toolbar";
 import { CanvasStage } from "./ui/CanvasStage";
 import { BottomDrawer } from "./ui/BottomDrawer";
-import { createDemoProject } from "./state/appState";
 import { noSelection } from "./state/selection";
 import type { Selection } from "./state/selection";
 import type { Project, TimebaseView } from "./state/types";
@@ -11,9 +10,10 @@ import { initialViewport } from "./state/viewport";
 import type { ViewportState } from "./state/viewport";
 import { exportProject, importProject } from "./io/importExport";
 import { exportCanvasPng } from "./io/exportPng";
+import { createInitialEditorState } from "./state/editorState";
 
 function App() {
-  const [project, setProject] = useState<Project>(createDemoProject());
+  const [project, setProject] = useState<Project>(() => createInitialEditorState().project);
   const [selection, setSelection] = useState<Selection>(noSelection);
   const [viewport, setViewport] = useState<ViewportState>(initialViewport());
   const [warnings, setWarnings] = useState<string[]>([]);
@@ -48,6 +48,17 @@ function App() {
 
   const handleZoomReset = () => setViewport(initialViewport());
 
+  const handleProjectReset = () => {
+    if (!window.confirm("Reset the project to a blank diagram? This cannot be undone.")) {
+      return;
+    }
+    const initialState = createInitialEditorState();
+    setProject(initialState.project);
+    setSelection(initialState.selection);
+    setViewport(initialState.viewport);
+    setWarnings(initialState.warnings);
+  };
+
   return (
     <div className="app-shell">
       <Toolbar
@@ -57,6 +68,7 @@ function App() {
         onImport={handleImport}
         onExport={handleExport}
         onExportPng={handleExportPng}
+        onProjectReset={handleProjectReset}
         onZoomReset={handleZoomReset}
       />
       <div className="main-area">

@@ -34,8 +34,8 @@ const pickTimeStep = (zoomX: number) => {
   if (zoomX >= 6) return timeSteps[0]; // 0.1s
   if (zoomX >= 3) return timeSteps[1]; // 0.25s
   if (zoomX >= 1.5) return timeSteps[2]; // 0.5s
-  if (zoomX >= 0.8) return timeSteps[3]; // 1s
-  if (zoomX >= 0.4) return timeSteps[4]; // 2s
+  if (zoomX >= 0.5) return timeSteps[3]; // 1s
+  if (zoomX >= 0.25) return timeSteps[4]; // 2s
   if (zoomX >= 0.2) return timeSteps[5]; // 4s
   return timeSteps[6]; // 8s
 };

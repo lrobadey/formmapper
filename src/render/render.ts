@@ -1,6 +1,7 @@
 import type { Project, Section } from "../state/types";
 import type { ViewportState } from "../state/viewport";
 import { secToPx } from "../engine/transforms";
+import { getCurveControlPoint } from "../engine/curveGeometry";
 import { formatSecLabel } from "../engine/timebase";
 import { gridStepSec } from "../engine/snapping";
 import { getPalette } from "../state/appState";
@@ -92,7 +93,7 @@ export function renderScene(
   drawSections(ctx, project, viewport, layout, selection);
   drawCurve(ctx, project, viewport, layout, selection);
   drawAxis(ctx, project, viewport, layout);
-  drawTitle(ctx, project, layout);
+  drawTitle(ctx, project);
 
   ctx.restore();
 }
@@ -247,12 +248,13 @@ function drawCurve(
         ctx.moveTo(x2, y1);
         ctx.lineTo(x2, y2);
       } else if (p.rightTransition.type === "curve") {
-        const bias = p.rightTransition.param;
-        const tBias = 0.5 + 0.4 * bias;
-        const ctrlX = x1 + (x2 - x1) * tBias;
-        const ctrlY = y1 + (y2 - y1) * tBias;
+        const control = getCurveControlPoint(
+          { x: x1, y: y1 },
+          { x: x2, y: y2 },
+          p.rightTransition.param
+        );
         ctx.moveTo(x1, y1);
-        ctx.quadraticCurveTo(ctrlX, ctrlY, x2, y2);
+        ctx.quadraticCurveTo(control.x, control.y, x2, y2);
       } else {
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
@@ -351,7 +353,7 @@ function drawAxis(
    TITLE
    ═══════════════════════════════════════════════════════════════ */
 
-function drawTitle(ctx: CanvasRenderingContext2D, project: Project, layout: Layout) {
+function drawTitle(ctx: CanvasRenderingContext2D, project: Project) {
   ctx.fillStyle = COLORS.textMuted;
   ctx.font = '12px "Space Grotesk", system-ui, sans-serif';
   ctx.fillText(project.title, 12, 18);

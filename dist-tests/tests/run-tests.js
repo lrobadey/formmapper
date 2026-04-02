@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("./sections.test");
+require("./snap.test");
+require("./curve.test");
+require("./curveGeometry.test");
+require("./repair.test");
+require("./editorState.test");
+require("./uiTabs.test");
+const testUtils_1 = require("./testUtils");
+(0, testUtils_1.runAllTests)();

@@ -122,19 +122,6 @@ export const repairSections = (input: Section[]): { sections: Section[]; warning
     repaired.push({ ...section, startSec, endSec });
   });
 
-  if (repaired.length === 0) {
-    warnings.push("No valid sections found; inserted placeholder section.");
-    repaired.push({
-      id: "sec-1",
-      name: "Section 1",
-      colorId: "slate_01",
-      startSec: 0,
-      endSec: 4,
-      notes: "",
-      tags: [],
-    });
-  }
-
   return { sections: repaired, warnings };
 };
 

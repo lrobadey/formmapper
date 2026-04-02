@@ -8,6 +8,7 @@ import { clampPan, clampZoom } from "../state/viewport";
 import type { ViewportState } from "../state/viewport";
 import { renderScene, SECTION_BAR_HEIGHT, computeLayout } from "../render/render";
 import { pxToSec, secToPx } from "../engine/transforms";
+import { distanceToQuadraticCurve } from "../engine/curveGeometry";
 import { snapSec } from "../engine/snapping";
 import { rippleResizeSections } from "../state/sections";
 import type { Section, CurvePoint } from "../state/types";
@@ -284,7 +285,7 @@ function hitTestCurveSegment(
 
     const y1 = layout.curveBottom - ((a.y - yMin) / range) * layout.curveHeight;
     const y2 = layout.curveBottom - ((b.y - yMin) / range) * layout.curveHeight;
-    const dist = distanceToSegment(px, py, x1, y1, x2, y2, a.rightTransition.type);
+    const dist = distanceToSegment(px, py, x1, y1, x2, y2, a.rightTransition.type, a.rightTransition.param);
     if (dist <= SEGMENT_HIT_PX) return { type: "curveSegment", index: i };
   }
   return null;
@@ -297,7 +298,8 @@ function distanceToSegment(
   y1: number,
   x2: number,
   y2: number,
-  type: CurvePoint["rightTransition"]["type"]
+  type: CurvePoint["rightTransition"]["type"],
+  param: number
 ): number {
   if (type === "step") {
     const horizontal = Math.abs(py - y1);
@@ -307,7 +309,7 @@ function distanceToSegment(
     return Math.min(horizontal, vertical);
   }
   if (type === "curve") {
-    return distanceToLine(px, py, x1, y1, x2, y2);
+    return distanceToQuadraticCurve(px, py, { x: x1, y: y1 }, { x: x2, y: y2 }, param);
   }
   return distanceToLine(px, py, x1, y1, x2, y2);
 }
